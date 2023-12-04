@@ -1,4 +1,4 @@
-iimport time
+import time
 
 def game_over():
     print("Game Over!")
