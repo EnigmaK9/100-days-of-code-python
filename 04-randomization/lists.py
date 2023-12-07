@@ -50,4 +50,6 @@ states_of_america = [
     "Alaska",           # January 3, 1959
     "Hawaii"            # August 21, 1959
 ]
+states_of_america[1] = "Pensilvania"
+states_of_america.extend(["Charlieland","Tangoland"])
 print(states_of_america[0])
