@@ -57,20 +57,20 @@ stages = ['''
 =========
 ''']
 
-end_of_game = False
-word_list = ["ardvark", "baboon", "camel"]
+END_OF_GAME = False
+word_list = ["charles", "baboon", "camel"]
 chosen_word = random.choice(word_list)
 word_length = len(chosen_word)
-
-lives = 6
-
+LIVES = 6
+#Testing code
 print(f'Pssst, the solution is {chosen_word}.')
 
+#Create blanks
 display = []
 for _ in range(word_length):
     display += "_"
 
-while not end_of_game:
+while not END_OF_GAME:
     guess = input("Guess a letter: ").lower()
 
     #Check guessed letter
@@ -79,34 +79,26 @@ while not end_of_game:
         # print(f"Current position: {position}\n Current letter: {letter}\n Guessed letter: {guess}")
         if letter == guess:
             display[position] = letter
-
-    for letter in chosen_word:
-        if letter == guess:
-            display += letter
-            correct_letters.append(guess)
-        elif letter in correct_letters:
-            display += letter
-        else:
-            display +="_"
-
+    if guess not in chosen_word:
+        LIVES -= 1
+        if LIVES == 0:
+            GAME_OVER = True
+            print("you lose.")
+    #Join all the elements in the list and turn it into a String.
     print(f"{' '.join(display)}")
 
     #Check if user has got all letters.
     if "_" not in display:
-        end_of_game = True
+        END_OF_GAME = True
         print("You win.")
 
-
-    #TODO-3: - print the ASCII art from 'stages' that corresponds to the current number of 'lives' the user has remaining.
-
     elif guess not in chosen_word:
-      lives -= 1
-      print(stages[lives + 1])
-      # print(stages[lives])
-      if lives > 0:
-        print(f"You have {lives} gueses left.")
-      else:
-        end_of_game = True
-        print(stages[lives])
-        print("What have you done? He's dead... Your man is dead, how does that make you feel...?")
-
+        LIVES -= 1
+        print(stages[LIVES + 1])
+      # print(stages[LIVES])
+        if LIVES > 0:
+            print(f"You have {LIVES} gueses left.")
+        else:
+            END_OF_GAME = True
+            print(stages[LIVES])
+            print("What have you done? He's dead... Your man is dead, how does that make you feel...?")
